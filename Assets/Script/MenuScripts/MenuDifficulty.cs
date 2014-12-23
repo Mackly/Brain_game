@@ -1,65 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Menu2 : MonoBehaviour {
+public class MenuDifficulty : MenuBase {
 
     //Menu jouer
-    public Texture normalMouseOver;
-    public Texture hardMouseOver;
-    public Texture legendaryMouseOver;
-    public Texture backMouseOver;
-    public Texture still2;
+    public Texture NormalDifficultyMouseOver;
+    public Texture HardDifficultyMouseOver;
+    public Texture LegendaryDifficultyMouseOver;
+    public Texture BackMouseOver;
+    public Texture Still;
 
-    private Camera cam;
-
-	// Use this for initialization
-	void Start () {
-        cam = FindObjectOfType<Camera>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void receveNotify(string name, InOut2 it)
+    public override void MouseOver(string name)
     {
         switch (name)
         {
             //Menu 2
             case "Normal":
                 {
-                    renderer.material.mainTexture = normalMouseOver;
+                    renderer.material.mainTexture = NormalDifficultyMouseOver;
                     break;
                 }
             case "Hard":
                 {
-                    renderer.material.mainTexture = hardMouseOver;
+                    renderer.material.mainTexture = HardDifficultyMouseOver;
                     break;
                 }
             case "Legendary":
                 {
-                    renderer.material.mainTexture = legendaryMouseOver;
+                    renderer.material.mainTexture = LegendaryDifficultyMouseOver;
                     break;
                 }
             case "Retour":
                 {
-                    renderer.material.mainTexture = backMouseOver;
+                    renderer.material.mainTexture = BackMouseOver;
                     break;
                 }
-            case "out":
+            default:
                 {
-                    renderer.material.mainTexture = still2;
+                    renderer.material.mainTexture = Still;
                     break;
                 }
         }
     }
 
 
-    public void receveNotify(InOut2 it)
+    public override void ItemSelected(MenuItem item)
     {
 
-        switch (it.gameObject.name)
+        switch (item.gameObject.name)
         {
             //Menu 2
             case "Normal":
@@ -79,7 +67,7 @@ public class Menu2 : MonoBehaviour {
                 }
             case "Retour":
                 {
-                    cam.transform.Rotate(new Vector3(0, 180, 0));
+                    m_Camera.transform.Rotate(new Vector3(0, 180, 0));
                     break;
                 }
         }

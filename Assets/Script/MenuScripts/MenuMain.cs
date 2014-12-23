@@ -1,67 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Menu : MonoBehaviour {
+public class MenuMain : MenuBase {
 
     //Menu simple
-    public Texture jouerMouseOver;
-    public Texture multiMouseOver;
-    public Texture tutoMouseOver;
-    public Texture quitterMouseOver;
-    public Texture still;
-
-
-    private Camera cam;
-
-	// Use this for initialization
-	void Start () {
-
-        cam = FindObjectOfType<Camera>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
-    public void receveNotify(string name, InOut it)
+    public Texture JouerMouseOver;
+    public Texture MultiMouseOver;
+    public Texture TutoMouseOver;
+    public Texture QuitterMouseOver;
+    public Texture Still;
+    
+    public override void MouseOver(string name)
     {
 
         switch(name)
         {
             case "Multijoueur":
                 {
-                    renderer.material.mainTexture = multiMouseOver;
+                    renderer.material.mainTexture = MultiMouseOver;
                     break;
                 }
             case "Jouer": 
                 {
-                    renderer.material.mainTexture = jouerMouseOver;
+                    renderer.material.mainTexture = JouerMouseOver;
                     break;
                 }
             case "Tutoriel":
                 {
-                    renderer.material.mainTexture = tutoMouseOver;
+                    renderer.material.mainTexture = TutoMouseOver;
                     break;
                 }
             case "quitter":
                 {
-                    renderer.material.mainTexture = quitterMouseOver;
+                    renderer.material.mainTexture = QuitterMouseOver;
                     break;
                 }
-            case "out":
+            default:
                 {
-                    renderer.material.mainTexture = still;
+                    renderer.material.mainTexture = Still;
                     break;
                 }
         }
     }
 
-    public void receveNotify(InOut it)
+    public override void ItemSelected(MenuItem item)
     {
 
-        switch (it.gameObject.name)
+        switch (item.gameObject.name)
         {
             case "Multijoueur":
                 {
@@ -70,7 +55,7 @@ public class Menu : MonoBehaviour {
                 }
             case "Jouer":
                 {
-                    cam.transform.Rotate(new Vector3(0, 180, 0));
+                    m_Camera.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
                     break;
                 }
             case "Tutoriel":
