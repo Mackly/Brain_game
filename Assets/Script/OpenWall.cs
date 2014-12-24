@@ -1,28 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PassByWall : MonoBehaviour {
+public class OpenWall : MonoBehaviour {
 
-    public Rigidbody_test player;
+    public Rigidbody_test Player;
 
-	// Use this for initialization
 	void Start () {
 	
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        if (player.getPower())
+        if (Player.getPower())
         {
             collider.isTrigger = true;
         }
-
         else
         {
             collider.isTrigger = false;
         }
 	}
-
 
   /*****POUR UTILISER ALPHA,IL FAUT AVOIR LE BON SHADER SOIT TRANSPARENT->DIFFUSE*******/
 
@@ -30,10 +26,9 @@ public class PassByWall : MonoBehaviour {
     {
         if (obj.gameObject.tag == "Player")
         {
-            Renderer T = GetComponentInChildren<Renderer>();
-            Color color = T.material.color;
+            Color color = renderer.material.color;
             color.a = 0.5f;
-            T.material.color = color;
+            renderer.material.color = color;
         }
     }
 
@@ -41,10 +36,9 @@ public class PassByWall : MonoBehaviour {
     {
         if (obj.gameObject.tag == "Player")
         {
-            Renderer T = GetComponentInChildren<Renderer>();
-            Color color = T.material.color;
-            color.a = 1f;
-            T.material.color = color;
+            Color color = renderer.material.color;
+            color.a = 1.0f;
+            renderer.material.color = color;
         }
     }
 }

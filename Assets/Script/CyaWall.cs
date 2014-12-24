@@ -5,14 +5,12 @@ using System.Collections.Generic;
 public class CyaWall : MonoBehaviour {
 
     float timer;
-    bool follow;
     bool activeTimer;
     Stack<Collider> bibi = new Stack<Collider>();
     public float a = 0;
 
 	// Use this for initialization
 	void Start () {
-        follow = false;
         timer = 0.5f;
         activeTimer = false;
 	}

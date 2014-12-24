@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraProto : MonoBehaviour {
+public class InputControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,6 +10,9 @@ public class CameraProto : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.LoadLevel(0);
+        }
 	}
 }

@@ -3,48 +3,54 @@ using System.Collections;
 
 public class Patrol : MonoBehaviour {
 
-    public Transform[] patrolPoints;
-    public Transform player;
-    private int currentSize;
-    bool follow;
-    bool end = false;
-    bool activate = false;
+    public Transform[] PatrolPoints;
+    public Transform Player;
+    private int m_Index;
+    bool Follow;
+    bool PatrolEnded = false;
+    bool Active = false;
 
 	// Use this for initialization
 	void Start () {
-        currentSize = 0;
-        follow = false;
+        m_Index = 0;
+        Follow = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (activate)
+        if (Active)
         {
-            if (!follow)
+            if (!Follow && PatrolPoints.Length > 0)
             {
-                if (transform.position == patrolPoints[currentSize].position)
+                if (m_Index >= PatrolPoints.Length)
                 {
-                    if (currentSize < (patrolPoints.Length - 1) && !end)
-                    {
-                        ++currentSize;
+                    m_Index = 0;
+                    PatrolEnded = true;
+                }
+                else if (m_Index <= 0)
+                {
+                    m_Index = PatrolPoints.Length - 1;
+                    PatrolEnded = false;
+                }
 
-                        if (currentSize == (patrolPoints.Length - 1))
-                            end = true;
+                if (transform.position == PatrolPoints[m_Index].position)
+                {
+                    if (PatrolEnded)
+                    {
+                        --m_Index;
                     }
                     else
                     {
-                        --currentSize;
-                        if (currentSize == 0)
-                            end = false;
+                        ++m_Index;
                     }
                 }
 
-                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentSize].position, 7 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[m_Index].position, 7 * Time.deltaTime);
             }
 
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, 8 * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 8 * Time.deltaTime);
             }
         }
 	}
@@ -54,8 +60,8 @@ public class Patrol : MonoBehaviour {
     {
         if (obj.gameObject.tag == "Player")
         {
-            follow = true;
-            activate = true;
+            Follow = true;
+            Active = true;
         }
     }
 
@@ -63,7 +69,7 @@ public class Patrol : MonoBehaviour {
     {
         if (obj.gameObject.tag == "Player")
         {
-            follow = false;
+            Follow = false;
         }
     }
 
@@ -77,6 +83,6 @@ public class Patrol : MonoBehaviour {
 
     public void detected()
     {
-        activate = true;
+        Active = true;
     }
 }

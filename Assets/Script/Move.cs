@@ -11,7 +11,7 @@ public class Move : MonoBehaviour {
     private bool reset;
     public MovePlayer2 player2;
     public GUITexture boost;
-    public GUITexture light;
+    public GUITexture m_Light;
     private Vector3 movdir;
     private Vector3 rotate;
 
@@ -49,7 +49,7 @@ public class Move : MonoBehaviour {
             if (timeBonus < 0)
             {
                 bonus.enabled = false;
-                light.enabled = false;
+                m_Light.enabled = false;
             }
         }
         else 
@@ -90,7 +90,7 @@ public class Move : MonoBehaviour {
             bonus.enabled = true;
             timeBonus = 10;
             Destroy(obj.gameObject);
-            light.enabled = true;
+            m_Light.enabled = true;
         }
 
     }

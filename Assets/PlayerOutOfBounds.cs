@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class zzz : MonoBehaviour
+public class PlayerOutOfBounds : MonoBehaviour
 {
 
     // Use this for initialization

@@ -4,18 +4,16 @@ using System.Collections;
 public class GuardsLegendary : MonoBehaviour {
     public Color green;
     public Color red;
-    Light light;
+    private Light m_Light;
 
     public Patrol cs;
 
-    float timer = 0;
     bool ok = false;
-    float speed = 5;
 
 	// Use this for initialization
 	void Start () {
-        light = GetComponent<Light>();
-        light.color = green;
+        m_Light = GetComponent<Light>();
+        m_Light.color = green;
 	}
 	
 	// Update is called once per frame
@@ -29,7 +27,7 @@ public class GuardsLegendary : MonoBehaviour {
     {
         if ((obj.gameObject.tag == "Player") && !ok)
         {
-            light.color = red;
+            m_Light.color = red;
             ok = true;
             Application.LoadLevel(1);
         }

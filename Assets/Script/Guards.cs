@@ -5,18 +5,17 @@ public class Guards : MonoBehaviour {
     public Color green;
     public Color red;
     public Camera cam;
-    Light light;
+    private Light m_Light;
 
     public Patrol cs;
 
     float timer = 0;
     bool ok = false;
-    float speed = 5;
 
 	// Use this for initialization
 	void Start () {
-        light = GetComponent<Light>();
-        light.color = green;
+        m_Light = GetComponent<Light>();
+        m_Light.color = green;
         cam.enabled = false;
 	}
 	
@@ -36,7 +35,7 @@ public class Guards : MonoBehaviour {
     {
         if ((obj.gameObject.tag == "Player") && !ok)
         {
-            light.color = red;
+            m_Light.color = red;
             cam.enabled = true;
             ok = true;
             timer = 5;

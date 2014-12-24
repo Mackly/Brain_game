@@ -2,36 +2,45 @@
 using System.Collections;
 
 public class Patrol_Guards : MonoBehaviour {
-    public Transform[] patrolPoints;
-    private int currentSize;
-    bool end;
+    public Transform[] PatrolPoints;
+    private int m_Index;
+    private bool PatrolEnded;
 
 	// Use this for initialization
 	void Start () {
-        currentSize = 0;
-        end = false;
+        m_Index = 0;
+        PatrolEnded = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (transform.position == patrolPoints[currentSize].position)
+        if (PatrolPoints.Length <= 0)
         {
-            if (currentSize < (patrolPoints.Length - 1) && !end)
-            {
-                ++currentSize;
+            return;
+        }
 
-                if (currentSize == (patrolPoints.Length - 1))
-                    end = true;
+        if (m_Index >= PatrolPoints.Length-1)
+        {
+            PatrolEnded = true;
+        }
+        else if (m_Index <= 0)
+        {
+            PatrolEnded = false;
+        }
+
+        if (transform.position == PatrolPoints[m_Index].position)
+        {
+            if (PatrolEnded)
+            {
+                --m_Index;
             }
             else
             {
-                --currentSize;
-                if (currentSize == 0)
-                    end = false;
+                ++m_Index;
             }
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentSize].position, 10 * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[m_Index].position, 10 * Time.deltaTime);
 	}
 }
